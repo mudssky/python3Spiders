@@ -232,7 +232,7 @@ def parse_a_page(htmlStr,rjid):
 
 
 
-def main2(url):
+def insert_oneurl(url):
     # 记录日志
     logger = logging.getLogger('dlsiteSpiderLogger')
     logger.setLevel(logging.ERROR)
@@ -276,18 +276,8 @@ def main3(url):
             pass
     except Exception as e:
         print('error',url,e)
-
-if __name__=="__main__":
-    multiprocessing.freeze_support()
-    if len(sys.argv)==3:
-        startNum = int(sys.argv[1])
-        endNum = int(sys.argv[2])
-    elif len(sys.argv)==2:
-        startNum = int(sys.argv[1])
-        endNum = startNum + 1
-    else:
-        print('请输入开始位置和结束位置id数字，用空格隔开')
-        sys.exit()
+def main(startNum,endNum):
+    multiprocessing.freeze_support()  
     urlList=[]
     for x in range(startNum,endNum):
         xlen=len(str(x))
@@ -299,5 +289,18 @@ if __name__=="__main__":
         print('add url:',url)
         urlList.append(url)
     pool = Pool()
-    pool.map(main2, urlList)
-    print('complete')
+    pool.map(insert_oneurl, urlList)
+    # print('complete')
+
+    
+if __name__=="__main__":
+    if len(sys.argv)==3:
+        startNum = int(sys.argv[1])
+        endNum = int(sys.argv[2])
+    elif len(sys.argv)==2:
+        startNum = int(sys.argv[1])
+        endNum = startNum + 1
+    else:
+        print('请输入开始位置和结束位置id数字，用空格隔开')
+        sys.exit()
+    main(startNum,endNum)
