@@ -293,8 +293,10 @@ def main(startNum, endNum):
     urlList = []
     for x in range(startNum, endNum):
         xlen = len(str(x))
-        if(6 > xlen):
+        if 6 > xlen:
             rjid = 'RJ'+(6-xlen) * '0' + str(x)
+        elif 8 > xlen:
+            rjid = 'RJ'+(8-xlen) * '0' + str(x)
         else:
             rjid = 'RJ'+str(x)
         url = r'https://www.dlsite.com/maniax/work/=/product_id/'+rjid+'.html'

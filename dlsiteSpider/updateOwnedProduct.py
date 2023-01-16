@@ -1,9 +1,8 @@
-import  pymongo
+import pymongo
 import dlsiteSpider3
 import os
 import re
 import fire
-import pymongo
 # 递归获取当前目录下所有RJID并且去重
 def getRjidList(path):
     '''
@@ -35,7 +34,7 @@ files 同样是 list , 内容是该文件夹中所有的文件(不包括子目�
     for filename in filename_list:
         upper_filename = filename.upper()
         # print(upper_filename)
-        result=re.match('(RJ\d{6})',upper_filename)
+        result=re.match('(RJ\d{6,8})',upper_filename)
         if result:
             rjidList.add(result.group())
     return sorted(rjidList)
